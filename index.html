@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Conta Outra! (parece piada, mas é conta de verdade!)</title>
+    <!-- Aqui a gente conecta o nosso HTML com o arquivo que cuida de toda a aparência do jogo -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- O cabeçalho do jogo, com o nome divertido e um pequeno subtítulo -->
+    <header>
+        <h1>Conta Outra!<br /><small>parece piada, mas é conta de verdade!</small></h1>
+    </header>
+
+    <!-- A área principal do jogo, onde as diferentes seções (início, seleção, jogo e fim) vão aparecer -->
+    <main class="container" role="main" aria-label="Tela do jogo">
+        <!-- A primeira tela que o jogador vê, pedindo o nome dele -->
+        <section id="start-section">
+            <!-- Onde o jogador digita o nome dele -->
+            <input type="text" id="player-name" placeholder="Digite seu nome para começar"
+                aria-describedby="name-error" autocomplete="off" aria-required="true" />
+            <!-- Um espacinho para mostrar mensagens de erro, tipo se o nome for muito longo -->
+            <div id="name-error" role="alert" aria-live="assertive" aria-atomic="true"></div>
+            <!-- O botão que inicia a brincadeira, ele começa desabilitado até a gente digitar um nome válido -->
+            <button id="start-btn" type="button" disabled aria-label="Começar o jogo">Começar</button>
+        </section>
+
+        <!-- A tela para escolher qual ano o jogador quer estudar, ela fica escondida no início -->
+        <section id="subject-selection" class="hidden" aria-label="Seleção de assunto para estudo">
+            <h2>Selecione um ano para estudar:</h2>
+            <!-- Os botões para escolher o ano, organizados de um jeito que fica legal em qualquer tela -->
+            <div class="subject-buttons">
+                <button class="subject-btn" data-subject="1" aria-label="Selecionar o 1º Ano">1º Ano</button>
+                <button class="subject-btn" data-subject="2" aria-label="Selecionar o 2º Ano">2º Ano</button>
+                <button class="subject-btn" data-subject="3" aria-label="Selecionar o 3º Ano">3º Ano</button>
+                <button class="subject-btn" data-subject="4" aria-label="Selecionar o 4º Ano">4º Ano</button>
+                <button class="subject-btn" data-subject="5" aria-label="Selecionar o 5º Ano">5º Ano</button>
+                <button class="subject-btn" data-subject="6" aria-label="Selecionar o 6º Ano">6º Ano</button>
+                <button class="subject-btn" data-subject="7" aria-label="Selecionar o 7º Ano">7º Ano</button>
+                <button class="subject-btn" data-subject="8" aria-label="Selecionar o 8º Ano">8º Ano</button>
+                <button class="subject-btn" data-subject="9" aria-label="Selecionar o 9º Ano">9º Ano</button>
+            </div>
+        </section>
+
+        <!-- A tela onde o jogo acontece de verdade, com as perguntas e tudo mais. Também começa escondida. -->
+        <section id="game-section" class="hidden" aria-live="polite" aria-atomic="true"
+            aria-label="Seção do jogo com perguntas">
+            <!-- Um painel com informações importantes durante o jogo: o ano, as vidas e os pontos de XP -->
+            <div id="game-header" role="region" aria-label="Status do jogo">
+                <div id="level-display" aria-live="polite">Ano: 1</div>
+                <div id="lives-display" aria-live="polite">Vidas: ❤️❤️❤️</div>
+                <div id="xp-display" aria-live="polite">XP: 0</div>
+            </div>
+
+            <!-- Onde a barra de progresso do jogo vai aparecer, mostrando o quanto já avançamos -->
+            <div id="progress-container" aria-label="Progresso do jogo">
+                <div id="progress-bar"></div>
+            </div>
+
+            <!-- O lugar onde a pergunta ou a missão atual será exibida -->
+            <div id="mission" class="mission-text" tabindex="0">Carregando missão...</div>
+            <!-- O container onde as opções de resposta (botões) serão geradas -->
+            <div id="options-container"></div>
+
+            <!-- Os botões para navegar entre as perguntas: "Anterior" e "Próxima" -->
+            <div id="navigation-buttons">
+                <button id="prev-btn" type="button" aria-label="Questão anterior" disabled>Anterior</button>
+                <button id="next-btn" type="button" aria-label="Próxima questão" disabled>Próxima</button>
+            </div>
+
+            <!-- Um espacinho para dar um retorno ao jogador, dizendo se ele acertou ou errou -->
+            <div id="answer-feedback" class="feedback" aria-live="assertive" role="alert"></div>
+        </section>
+
+        <!-- A tela que aparece quando o jogo termina, mostrando o desempenho do jogador -->
+        <section id="end-section" class="hidden" aria-label="Fim do jogo">
+            <!-- O título final, que muda dependendo se o jogador ganhou ou perdeu -->
+            <h2 id="end-title"></h2>
+            <!-- Um resumo rápido de como o jogador se saiu -->
+            <p id="summary-text"></p>
+
+            <h3>Histórico de acertos</h3>
+            <!-- Uma lista das perguntas que o jogador acertou -->
+            <ul id="history-list" class="history-list"></ul>
+
+            <!-- O botão para começar tudo de novo! -->
+            <button id="restart-btn" type="button" aria-label="Jogar novamente">Jogar Novamente</button>
+        </section>
+    </main>
+
+<!-- A tag de áudio para a música de fundo. Ela vai tocar em looping. -->
+<audio id="background-music" loop preload="auto" autoplay>
+    <!-- Música de fundo divertida para um jogo educativo -->
+    <source src="/music/musica_fundo.mp3" type="audio/mpeg">
+    <!-- Uma mensagem para navegadores mais antigos que não suportam áudio -->
+    Seu navegador não suporta a tag de áudio.
+</audio>
+
+
+    <!-- Onde a gente conecta o nosso HTML com o arquivo JavaScript, que faz toda a mágica acontecer -->
+    <script src="script.js"></script>
+</body>
+</html>
